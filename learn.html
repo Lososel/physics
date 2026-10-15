@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мир Физики</title>
+<meta name="description" content="Видеоуроки, интересные факты и задания по физике для учеников.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070c2b;
+    --card: rgba(22, 34, 96, .72);
+    --card-border: rgba(120, 150, 255, .28);
+    --text: #eef2ff;
+    --muted: #b6c0ea;
+    --gold: #ffc93c;
+    --orange: #ff8a1f;
+    --red: #e8352b;
+    --cyan: #4fd8ff;
+    --green: #3ddc63;
+    --violet: #a77bff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Rubik", "Segoe UI", Arial, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(900px 600px at 80% -10%, rgba(80,110,255,.35), transparent 70%),
+      radial-gradient(700px 500px at -10% 60%, rgba(255,90,60,.18), transparent 70%),
+      var(--bg);
+    background-attachment: fixed;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+      radial-gradient(1px 1px at 30% 70%, #cfe0ff, transparent),
+      radial-gradient(1.5px 1.5px at 55% 15%, #fff, transparent),
+      radial-gradient(1px 1px at 75% 45%, #fff2c4, transparent),
+      radial-gradient(1.5px 1.5px at 90% 85%, #fff, transparent),
+      radial-gradient(1px 1px at 20% 90%, #fff, transparent),
+      radial-gradient(1px 1px at 65% 80%, #bfe9ff, transparent),
+      radial-gradient(1px 1px at 45% 50%, #fff, transparent);
+    background-size: 420px 420px;
+    opacity: .8;
+  }
+  .wrap { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 24px 16px 64px; }
+
+  header { text-align: center; padding: 20px 0 8px; }
+  header .small { font-weight: 700; font-size: clamp(22px, 5vw, 34px); color: #fff; }
+  header h1 {
+    font-weight: 900; font-size: clamp(48px, 12vw, 88px); line-height: 1;
+    background: linear-gradient(180deg, #fff4c2, var(--gold) 45%, var(--orange));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 4px 0 #7a2400);
+  }
+  header p { color: var(--muted); margin-top: 10px; }
+
+  nav {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+    padding: 12px 0; margin: 12px 0 8px;
+    background: linear-gradient(180deg, var(--bg) 70%, transparent);
+  }
+  nav a {
+    color: #fff; text-decoration: none; font-weight: 700; font-size: 15px;
+    padding: 9px 16px; border-radius: 999px;
+    background: linear-gradient(180deg, #ff6a45, #c81f2a);
+    box-shadow: 0 4px 14px rgba(232,53,43,.35);
+  }
+
+  section { margin-top: 36px; scroll-margin-top: 70px; }
+  h2 { font-size: clamp(24px, 5vw, 32px); font-weight: 900; display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  h2 .ico { font-size: 1.1em; }
+  .lead { color: var(--muted); margin-bottom: 16px; }
+
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 18px; padding: 18px;
+    backdrop-filter: blur(4px);
+  }
+  .card h3 { font-size: 19px; margin-bottom: 6px; }
+  .card p { color: var(--muted); font-size: 15px; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--cyan); margin-bottom: 6px; }
+  .formula {
+    display: inline-block; margin: 10px 0 12px; padding: 6px 12px; border-radius: 10px;
+    font-weight: 700; font-size: 18px; color: var(--gold);
+    background: rgba(0,0,0,.3); border: 1px dashed rgba(255,201,60,.5);
+  }
+  .btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 700; font-size: 14px; text-decoration: none; color: #fff;
+    padding: 8px 12px; border-radius: 10px;
+  }
+  .btn.yt { background: #e5322d; }
+  .btn.sim { background: #1f7a4b; }
+
+  .fact { display: flex; gap: 14px; align-items: flex-start; }
+  .fact .num {
+    flex: none; width: 46px; height: 46px; border-radius: 50%;
+    display: grid; place-items: center; font-weight: 900; font-size: 22px; color: #1b1030;
+    background: linear-gradient(180deg, #fff4c2, var(--gold));
+  }
+  .fact b { color: #fff; }
+
+  details { margin-top: 12px; }
+  summary {
+    cursor: pointer; font-weight: 700; color: var(--gold); list-style: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "▶"; font-size: 11px; transition: transform .2s; }
+  details[open] summary::before { transform: rotate(90deg); }
+  details .answer { margin-top: 8px; padding: 10px 12px; border-radius: 10px; background: rgba(61,220,99,.12); border-left: 3px solid var(--green); color: var(--text); font-size: 15px; }
+
+  .options { display: grid; gap: 8px; margin-top: 12px; }
+  .options button {
+    font: 500 15px "Rubik", sans-serif; text-align: left; color: var(--text);
+    padding: 10px 12px; border-radius: 10px; cursor: pointer;
+    background: rgba(255,255,255,.06); border: 1px solid var(--card-border);
+  }
+  .options button.ok { background: rgba(61,220,99,.25); border-color: var(--green); }
+  .options button.no { background: rgba(232,53,43,.25); border-color: var(--red); }
+  .feedback { margin-top: 8px; font-size: 15px; min-height: 1.4em; }
+
+  .planets { margin-top: 12px; }
+  .planets label { display: block; font-weight: 500; margin-bottom: 6px; }
+  .planets input {
+    width: 120px; font: 700 18px "Rubik", sans-serif; padding: 8px 10px; border-radius: 10px;
+    border: 1px solid var(--card-border); background: rgba(0,0,0,.3); color: #fff;
+  }
+  .planets table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 15px; }
+  .planets td { padding: 7px 4px; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .planets td:last-child { text-align: right; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; }
+
+  ol.steps { padding-left: 20px; color: var(--muted); font-size: 15px; margin-top: 6px; }
+  ol.steps li { margin: 3px 0; }
+
+  footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 14px; }
+  footer strong { color: var(--gold); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="small">Откройте Мир</div>
+    <h1>Физики</h1>
+    <p>Смотри • Исследуй • Учись!</p>
+  </header>
+
+  <nav>
+    <a href="#video">🎬 Видеоуроки</a>
+    <a href="#facts">💡 Факты</a>
+    <a href="#tasks">🧪 Задания</a>
+  </nav>
+
+  <!-- ============ ВИДЕОУРОКИ ============ -->
+  <section id="video">
+    <h2><span class="ico">🎬</span> Видеоуроки</h2>
+    <p class="lead">Четыре большие темы: посмотри короткое видео, а потом проверь себя в интерактивной симуляции PhET.</p>
+    <div class="grid">
+      <article class="card">
+        <span class="tag">Механика</span>
+        <h3>Законы Ньютона</h3>
+        <p>Почему тело движется или стоит на месте? Инерция, сила и ускорение, действие и противодействие: три закона, на которых держится вся механика.</p>
+        <div class="formula">F = m·a</div>
+        <div class="btns">
+          <a class="btn yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD%D1%8B+%D0%9D%D1%8C%D1%8E%D1%82%D0%BE%D0%BD%D0%B0+%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0+%D1%83%D1%80%D0%BE%D0%BA">▶ Видео</a>
+          <a class="btn sim" target="_blank" rel="noopener" href="https://phet.colorado.edu/ru/simulations/forces-and-motion-basics">⚙ Симуляция</a>
+        </div>
+      </article>
+      <article class="card">
+        <span class="tag">Электричество</span>
+        <h3>Ток, напряжение и закон Ома</h3>
+        <p>Как работает электрическая цепь, что такое сопротивление и почему лампочка горит ярче при большем напряжении. Собери свою цепь!</p>
+        <div class="formula">I = U / R</div>
+        <div class="btns">
+          <a class="btn yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD+%D0%9E%D0%BC%D0%B0+%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0+%D1%83%D1%80%D0%BE%D0%BA">▶ Видео</a>
+          <a class="btn sim" target="_blank" rel="noopener" href="https://phet.colorado.edu/ru/simulations/circuit-construction-kit-dc">⚙ Симуляция</a>
+        </div>
+      </article>
+      <article class="card">
+        <span class="tag">Оптика</span>
+        <h3>Преломление света и радуга</h3>
+        <p>Почему ложка в стакане «ломается», как призма раскладывает белый свет на цвета и откуда берётся радуга после дождя.</p>
+        <div class="formula">n = c / v</div>
+        <div class="btns">
+          <a class="btn yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%D0%BF%D1%80%D0%B5%D0%BB%D0%BE%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5+%D1%81%D0%B2%D0%B5%D1%82%D0%B0+%D1%84%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0+%D1%83%D1%80%D0%BE%D0%BA">▶ Видео</a>
+          <a class="btn sim" target="_blank" rel="noopener" href="https://phet.colorado.edu/ru/simulations/bending-light">⚙ Симуляция</a>
+        </div>
+      </article>
+      <article class="card">
+        <span class="tag">Физика космоса</span>
+        <h3>Гравитация и орбиты</h3>
+        <p>Почему Луна не падает на Землю, как спутники держатся на орбите и что такое первая космическая скорость (≈ 7,9 км/с).</p>
+        <div class="formula">F = G·m₁m₂ / r²</div>
+        <div class="btns">
+          <a class="btn yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD+%D0%B2%D1%81%D0%B5%D0%BC%D0%B8%D1%80%D0%BD%D0%BE%D0%B3%D0%BE+%D1%82%D1%8F%D0%B3%D0%BE%D1%82%D0%B5%D0%BD%D0%B8%D1%8F+%D0%BE%D1%80%D0%B1%D0%B8%D1%82%D1%8B+%D1%83%D1%80%D0%BE%D0%BA">▶ Видео</a>
+          <a class="btn sim" target="_blank" rel="noopener" href="https://phet.colorado.edu/ru/simulations/gravity-and-orbits">⚙ Симуляция</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ ФАКТЫ ============ -->
+  <section id="facts">
+    <h2><span class="ico">💡</span> Интересные факты</h2>
+    <p class="lead">Физика удивительнее любой фантастики.</p>
+    <div class="grid">
+      <article class="card fact">
+        <div class="num">1</div>
+        <div>
+          <h3>Ты видишь Солнце в прошлом</h3>
+          <p>Свет летит со скоростью <b>≈ 300 000 км/с</b>, но до Земли ему всё равно нужно около <b>8 минут 20 секунд</b>. Если бы Солнце вдруг погасло, мы узнали бы об этом только через 8 минут.</p>
+        </div>
+      </article>
+      <article class="card fact">
+        <div class="num">2</div>
+        <div>
+          <h3>Атом почти пустой</h3>
+          <p>Ядро примерно в <b>100 000 раз меньше</b> самого атома. Если увеличить атом до размеров футбольного стадиона, ядро будет как горошина в центре поля, а всё остальное почти пустое пространство.</p>
+        </div>
+      </article>
+      <article class="card fact">
+        <div class="num">3</div>
+        <div>
+          <h3>Чайная ложка весом с гору</h3>
+          <p>Нейтронная звезда — остаток взорвавшейся звезды диаметром около 20 км. Её вещество настолько плотное, что <b>одна чайная ложка весила бы миллиард тонн</b>.</p>
+        </div>
+      </article>
+      <article class="card fact">
+        <div class="num">4</div>
+        <div>
+          <h3>GPS работает благодаря Эйнштейну</h3>
+          <p>Часы на спутниках GPS из-за эффектов теории относительности уходят вперёд примерно на <b>38 микросекунд в сутки</b>. Без поправки навигатор ошибался бы на <b>~10 км каждый день</b>.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ ЗАДАНИЯ ============ -->
+  <section id="tasks">
+    <h2><span class="ico">🧪</span> Задания и интерактивы</h2>
+    <p class="lead">Реши, угадай, проверь на опыте!</p>
+    <div class="grid">
+
+      <article class="card">
+        <span class="tag">Головоломка</span>
+        <h3>Молоток или перо?</h3>
+        <p>Астронавт на Луне (там нет воздуха) одновременно отпускает молоток и пёрышко с одной высоты. Что упадёт первым?</p>
+        <div class="options" data-quiz>
+          <button type="button" data-a="no">Молоток — он тяжелее</button>
+          <button type="button" data-a="no">Перо — оно легче</button>
+          <button type="button" data-a="ok">Упадут одновременно</button>
+        </div>
+        <div class="feedback" aria-live="polite"></div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Мини-задача</span>
+        <h3>Разгон автомобиля</h3>
+        <p>Автомобиль массой <b>1200 кг</b> разгоняется с ускорением <b>2,5 м/с²</b>. Какая сила его разгоняет? (Сопротивлением пренебречь.)</p>
+        <details>
+          <summary>Показать решение</summary>
+          <div class="answer">По второму закону Ньютона: F = m·a = 1200 кг · 2,5 м/с² = <b>3000 Н</b> (3 кН).</div>
+        </details>
+      </article>
+
+      <article class="card">
+        <span class="tag">Интерактив</span>
+        <h3>Сколько ты весишь на других планетах?</h3>
+        <p>Масса везде одинакова, а сила тяжести P = m·g зависит от планеты.</p>
+        <div class="planets">
+          <label for="mass">Твоя масса, кг</label>
+          <input id="mass" type="number" min="1" max="300" value="50" inputmode="decimal">
+          <table id="planetTable"></table>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Опыт дома</span>
+        <h3>«Сломанный» карандаш</h3>
+        <ol class="steps">
+          <li>Налей воду в прозрачный стакан.</li>
+          <li>Опусти в него карандаш наклонно.</li>
+          <li>Посмотри сбоку на уровне воды.</li>
+        </ol>
+        <details>
+          <summary>Почему так?</summary>
+          <div class="answer">Свет в воде движется медленнее, чем в воздухе, и на границе сред <b>преломляется</b>, то есть меняет направление. Поэтому часть карандаша под водой кажется смещённой, будто он сломан.</div>
+        </details>
+      </article>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>Кабинет физики • <strong>Смотри • Исследуй • Учись!</strong></p>
+  </footer>
+</div>
+
+<script>
+  // quiz
+  document.querySelectorAll('[data-quiz]').forEach(function (box) {
+    var fb = box.nextElementSibling;
+    box.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        box.querySelectorAll('button').forEach(function (x) { x.classList.remove('ok', 'no'); });
+        b.classList.add(b.dataset.a);
+        fb.textContent = b.dataset.a === 'ok'
+          ? '✅ Верно! Без воздуха все тела падают с одинаковым ускорением. Это показал астронавт Дэвид Скотт на Луне в 1971 году (миссия «Аполлон-15»).'
+          : '❌ Не совсем. Подумай: что мешает перу падать на Земле? На Луне этого нет.';
+      });
+    });
+  });
+
+  // weight on planets
+  var planets = [
+    ['🌍 Земля', 9.81], ['🌙 Луна', 1.62], ['🔴 Марс', 3.71],
+    ['🟠 Венера', 8.87], ['🪐 Юпитер', 24.79], ['☀️ Солнце', 274]
+  ];
+  var input = document.getElementById('mass');
+  var table = document.getElementById('planetTable');
+  function render() {
+    var m = parseFloat(String(input.value).replace(',', '.')) || 0;
+    table.innerHTML = planets.map(function (p) {
+      var w = Math.round(m * p[1]).toLocaleString('ru-RU');
+      return '<tr><td>' + p[0] + ' <small style="color:#8f9bd0">g = ' + p[1].toLocaleString('ru-RU') + '</small></td><td>' + w + ' Н</td></tr>';
+    }).join('');
+  }
+  input.addEventListener('input', render);
+  render();
+</script>
+</body>
+</html>

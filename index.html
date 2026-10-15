@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Откройте Мир Физики — плакат</title>
+<meta name="description" content="Плакат А4 для кабинета физики с QR-кодом: видеоуроки, интересные факты и задания.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --space-1: #050a24;
+    --space-2: #0d1a4a;
+    --space-3: #1b2f7a;
+    --gold-1: #fff4c2;
+    --gold-2: #ffc93c;
+    --gold-3: #ff8a1f;
+    --red-1: #ff5a3c;
+    --red-2: #d61f2c;
+    --red-3: #8f0f1d;
+    --cyan: #4fd8ff;
+    --violet: #a77bff;
+    --ink: #0b1030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #1a1d2b; }
+  body {
+    font-family: "Rubik", "Segoe UI", Arial, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  /* ---------- toolbar (screen only) ---------- */
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .toolbar a, .toolbar button {
+    font: 600 15px/1 "Rubik", sans-serif;
+    color: #fff; background: #2b3266; border: 1px solid #4a54a0;
+    padding: 10px 16px; border-radius: 999px; cursor: pointer; text-decoration: none;
+  }
+  .toolbar a:hover, .toolbar button:hover { background: #3a4290; }
+
+  /* ---------- poster (all sizes in cqw so it scales like a picture) ---------- */
+  .sheet {
+    width: min(100%, 794px);
+    aspect-ratio: 210 / 297;
+    container-type: inline-size;
+    background: #f4f1ea;
+    padding: 2.6cqw;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  }
+  .poster {
+    position: relative;
+    width: 100%; height: 100%;
+    border-radius: 2.4cqw;
+    overflow: hidden;
+    background:
+      radial-gradient(60cqw 45cqw at 50% 30%, rgba(80,110,255,.35), transparent 70%),
+      radial-gradient(50cqw 40cqw at 15% 85%, rgba(255,90,60,.28), transparent 70%),
+      radial-gradient(45cqw 45cqw at 90% 70%, rgba(167,123,255,.25), transparent 70%),
+      linear-gradient(180deg, var(--space-2) 0%, var(--space-1) 55%, #0a0f33 100%);
+    border: .5cqw solid #2a3c8f;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 3cqw 4cqw .8cqw;
+  }
+  .poster > * { flex-shrink: 0; }
+  .sky { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+  /* ---------- title plaque ---------- */
+  .title {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 1.8cqw 7cqw 2.2cqw;
+    margin-top: .6cqw;
+  }
+  .title::before {
+    content: ""; position: absolute; inset: 0;
+    border-radius: 3cqw;
+    background: linear-gradient(180deg, rgba(20,34,100,.85), rgba(8,14,50,.85));
+    border: .45cqw solid transparent;
+    background-clip: padding-box;
+    box-shadow: 0 0 0 .45cqw rgba(255,201,60,.9), 0 0 4cqw rgba(255,160,40,.45), inset 0 0 3cqw rgba(79,216,255,.25);
+  }
+  .title > * { position: relative; }
+  .title .small {
+    display: block;
+    font-weight: 700; font-size: 6.8cqw; line-height: 1.05;
+    background: linear-gradient(180deg, #fff 20%, var(--gold-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 .35cqw 0 #6b2a00);
+  }
+  .title .big {
+    display: block;
+    font-weight: 900; font-size: 15cqw; line-height: .98; letter-spacing: .02em;
+    background: linear-gradient(180deg, var(--gold-1) 0%, var(--gold-2) 45%, var(--gold-3) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 .55cqw 0 #7a2400) drop-shadow(0 0 2.2cqw rgba(255,150,30,.55));
+  }
+  .comet { position: absolute; z-index: 2; width: 24cqw; right: 1cqw; top: 1.4cqw; }
+  .glow-line {
+    position: relative; z-index: 1;
+    width: 70cqw; height: .5cqw; margin: 1.8cqw 0 1cqw;
+    background: linear-gradient(90deg, transparent, var(--gold-3), #fff, var(--gold-3), transparent);
+    box-shadow: 0 0 2cqw var(--gold-3);
+    border-radius: 1cqw;
+  }
+
+  /* ---------- three sections ---------- */
+  .sections {
+    position: relative; z-index: 1;
+    width: 84cqw;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    margin-top: 0;
+  }
+  .sections .cell { display: flex; flex-direction: column; align-items: center; position: relative; }
+  .sections .cell svg { width: 19cqw; height: 15.5cqw; margin-bottom: -2.4cqw; filter: drop-shadow(0 .8cqw 1cqw rgba(0,0,0,.5)); position: relative; z-index: 2; }
+  .sections .bar {
+    grid-column: 1 / -1; grid-row: 2;
+    border: .55cqw solid var(--red-1);
+    border-radius: 2.4cqw;
+    background: linear-gradient(180deg, rgba(120,20,30,.55), rgba(40,10,40,.75));
+    box-shadow: 0 0 2.4cqw rgba(255,90,60,.5), inset 0 0 2cqw rgba(0,0,0,.4);
+    height: 8.4cqw;
+  }
+  .sections .label {
+    grid-row: 2; align-self: center; justify-self: center;
+    font-weight: 700; font-size: 3.3cqw; line-height: 1.1; text-align: center;
+    padding-top: 1.2cqw;
+    text-shadow: 0 .3cqw .6cqw rgba(0,0,0,.6);
+  }
+  .sections .label:nth-of-type(1) { grid-column: 1; }
+  .sections .label:nth-of-type(2) { grid-column: 2; }
+  .sections .label:nth-of-type(3) { grid-column: 3; }
+  .sections .div {
+    grid-row: 2; align-self: stretch; width: .3cqw; margin: 2cqw 0;
+    background: linear-gradient(180deg, transparent, rgba(255,200,150,.8), transparent);
+    position: relative;
+  }
+  .sections .div::after { content: ""; position: absolute; left: 50%; top: 50%; width: 1.2cqw; height: 1.2cqw; transform: translate(-50%,-50%) rotate(45deg); background: var(--gold-2); }
+  .sections .div.d1 { grid-column: 2; justify-self: start; }
+  .sections .div.d2 { grid-column: 3; justify-self: start; }
+
+  /* ---------- QR zone ---------- */
+  .qr-zone {
+    position: relative; z-index: 1;
+    width: 100%;
+    display: grid; grid-template-columns: 1fr 38cqw 1fr; align-items: center;
+    margin-top: 3cqw;
+  }
+  .qr-frame {
+    position: relative;
+    background: #fff;
+    border-radius: 2cqw;
+    padding: 3.4cqw;
+    box-shadow: 0 0 0 .7cqw rgba(255,255,255,.15), 0 0 5cqw rgba(79,216,255,.45);
+  }
+  .qr-frame .qr { display: block; width: 100%; height: auto; }
+  .corner { position: absolute; width: 7cqw; height: 7cqw; border: .9cqw solid #c9d4ff; }
+  .corner.tl { top: -2.4cqw; left: -2.4cqw; border-right: 0; border-bottom: 0; border-top-left-radius: 2.4cqw; }
+  .corner.tr { top: -2.4cqw; right: -2.4cqw; border-left: 0; border-bottom: 0; border-top-right-radius: 2.4cqw; }
+  .corner.bl { bottom: -2.4cqw; left: -2.4cqw; border-right: 0; border-top: 0; border-bottom-left-radius: 2.4cqw; }
+  .corner.br { bottom: -2.4cqw; right: -2.4cqw; border-left: 0; border-top: 0; border-bottom-right-radius: 2.4cqw; }
+  .scan-hint {
+    position: absolute; left: 50%; bottom: -5.6cqw; transform: translateX(-50%);
+    white-space: nowrap; font-weight: 600; font-size: 2.3cqw; color: #c9d4ff; letter-spacing: .04em;
+  }
+
+  .side { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 2.4cqw; height: 100%; padding: 0 1cqw; }
+  .side svg { display: block; filter: drop-shadow(0 .6cqw .8cqw rgba(0,0,0,.5)); }
+  .formula {
+    font-weight: 800; font-size: 5.4cqw; line-height: 1; white-space: nowrap;
+    text-shadow: 0 .35cqw 0 rgba(0,0,0,.5);
+  }
+  .formula sup { font-size: .55em; }
+  .formula.f-gold { color: var(--gold-2); }
+  .formula.f-cyan { color: var(--cyan); }
+  .formula.f-white { color: #fff; }
+  .formula.f-pink { color: #ff8fb3; }
+
+  /* ---------- ribbon + arrow ---------- */
+  .ribbon { position: relative; z-index: 1; width: 100%; margin-top: auto; }
+  .ribbon svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .arrow { position: relative; z-index: 1; width: 11cqw; height: 8.25cqw; margin-top: -2.4cqw; }
+
+  /* ---------- print: exactly A4 ---------- */
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; padding: 0; gap: 0; }
+    .toolbar { display: none; }
+    .sheet { width: 210mm; height: 297mm; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button type="button" onclick="window.print()">🖨 Печать (A4)</button>
+  <a href="learn.html">Открыть страницу по QR-коду →</a>
+</div>
+
+<div class="sheet">
+<main class="poster">
+
+  <!-- starry sky + constellations -->
+  <svg class="sky" viewBox="0 0 100 141" preserveAspectRatio="none" aria-hidden="true">
+    <g id="stars"></g>
+    <!-- constellation: Big Dipper (left top) -->
+    <g stroke="rgba(170,200,255,.45)" stroke-width=".18" fill="none">
+      <polyline points="4,9 9,7 13,9 17,11 18,16 24,17 25,12 17,11"/>
+    </g>
+    <g fill="#dfe8ff">
+      <circle cx="4" cy="9" r=".5"/><circle cx="9" cy="7" r=".45"/><circle cx="13" cy="9" r=".5"/>
+      <circle cx="17" cy="11" r=".55"/><circle cx="18" cy="16" r=".5"/><circle cx="24" cy="17" r=".5"/><circle cx="25" cy="12" r=".55"/>
+    </g>
+    <!-- constellation: Cassiopeia (right, middle) -->
+    <g stroke="rgba(170,200,255,.45)" stroke-width=".18" fill="none">
+      <polyline points="78,66 83,62 87,67 91,61 96,64"/>
+    </g>
+    <g fill="#dfe8ff">
+      <circle cx="78" cy="66" r=".5"/><circle cx="83" cy="62" r=".55"/><circle cx="87" cy="67" r=".45"/><circle cx="91" cy="61" r=".55"/><circle cx="96" cy="64" r=".5"/>
+    </g>
+    <!-- constellation: Orion's belt (left bottom) -->
+    <g stroke="rgba(170,200,255,.4)" stroke-width=".18" fill="none">
+      <polyline points="3,112 7,108 11,104"/><polyline points="7,108 5,101"/><polyline points="7,108 10,115"/>
+    </g>
+    <g fill="#dfe8ff">
+      <circle cx="3" cy="112" r=".45"/><circle cx="7" cy="108" r=".5"/><circle cx="11" cy="104" r=".45"/><circle cx="5" cy="101" r=".55"/><circle cx="10" cy="115" r=".55"/>
+    </g>
+    <!-- confetti diamonds -->
+    <g>
+      <rect x="32" y="40" width="1.2" height="1.2" fill="#4fd8ff" transform="rotate(45 32.6 40.6)"/>
+      <rect x="70" y="44" width="1" height="1" fill="#ffc93c" transform="rotate(45 70.5 44.5)"/>
+      <rect x="92" y="34" width="1.3" height="1.3" fill="#ff5a3c" transform="rotate(45 92.6 34.6)"/>
+      <rect x="6" y="38" width="1" height="1" fill="#a77bff" transform="rotate(45 6.5 38.5)"/>
+      <rect x="90" y="118" width="1.4" height="1.4" fill="#4fd8ff" transform="rotate(45 90.7 118.7)"/>
+      <rect x="20" y="130" width="1.1" height="1.1" fill="#ffc93c" transform="rotate(45 20.5 130.5)"/>
+      <rect x="80" y="132" width="1" height="1" fill="#ff8fb3" transform="rotate(45 80.5 132.5)"/>
+      <rect x="50" y="129" width=".9" height=".9" fill="#fff" transform="rotate(45 50.4 129.4)"/>
+      <circle cx="94" cy="90" r=".7" fill="#ff8a1f"/>
+      <circle cx="4" cy="78" r=".8" fill="#4fd8ff"/>
+      <circle cx="62" cy="38" r=".5" fill="#ff8fb3"/>
+    </g>
+  </svg>
+
+  <!-- comet -->
+  <svg class="comet" viewBox="0 0 120 50" aria-hidden="true">
+    <defs>
+      <linearGradient id="tail" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#ff8a1f" stop-opacity="0"/>
+        <stop offset=".7" stop-color="#ffc93c" stop-opacity=".8"/>
+        <stop offset="1" stop-color="#fff"/>
+      </linearGradient>
+    </defs>
+    <path d="M2 46 Q60 30 100 12 L103 18 Q62 34 2 46 Z" fill="url(#tail)"/>
+    <path d="M102 4 l3.2 7.4 8 .7 -6 5.3 1.8 7.8 -7 -4.1 -7 4.1 1.8 -7.8 -6 -5.3 8 -.7z" fill="#ffd84a" stroke="#fff" stroke-width="1"/>
+  </svg>
+
+  <!-- title -->
+  <header class="title">
+    <span class="small">Откройте Мир</span>
+    <span class="big">Физики</span>
+  </header>
+  <div class="glow-line"></div>
+
+  <!-- three sections -->
+  <section class="sections" aria-label="Разделы">
+    <!-- video -->
+    <div class="cell" style="grid-column:1;grid-row:1">
+      <svg viewBox="0 0 100 85" aria-hidden="true">
+        <g transform="rotate(-12 20 30)">
+          <rect x="8" y="16" width="80" height="16" rx="3" fill="#2b2b33"/>
+          <g fill="#fff"><path d="M18 16 h10 l-8 16 h-10z"/><path d="M40 16 h10 l-8 16 h-10z"/><path d="M62 16 h10 l-8 16 h-10z"/></g>
+        </g>
+        <rect x="8" y="34" width="84" height="46" rx="6" fill="#e5322d"/>
+        <rect x="8" y="34" width="84" height="12" rx="6" fill="#ff5b4f"/>
+        <circle cx="50" cy="60" r="14" fill="#fff"/>
+        <path d="M45 52 L59 60 L45 68Z" fill="#e5322d"/>
+        <circle cx="90" cy="20" r="4" fill="#ff5a3c"/>
+      </svg>
+    </div>
+    <!-- facts: lightbulb + atom -->
+    <div class="cell" style="grid-column:2;grid-row:1">
+      <svg viewBox="0 0 100 85" aria-hidden="true">
+        <defs>
+          <radialGradient id="bulb" cx=".45" cy=".4" r=".6">
+            <stop offset="0" stop-color="#fffbe0"/><stop offset=".6" stop-color="#ffd84a"/><stop offset="1" stop-color="#ff9f1c"/>
+          </radialGradient>
+        </defs>
+        <g stroke="#ffd84a" stroke-width="3" stroke-linecap="round">
+          <line x1="50" y1="2" x2="50" y2="8"/><line x1="20" y1="12" x2="25" y2="17"/><line x1="80" y1="12" x2="75" y2="17"/>
+          <line x1="10" y1="38" x2="17" y2="38"/><line x1="90" y1="38" x2="83" y2="38"/>
+        </g>
+        <path d="M50 12 C32 12 24 26 24 38 C24 50 34 55 37 64 H63 C66 55 76 50 76 38 C76 26 68 12 50 12Z" fill="url(#bulb)" stroke="#fff6c8" stroke-width="2"/>
+        <rect x="37" y="65" width="26" height="6" rx="2" fill="#8d97b8"/>
+        <rect x="39" y="72" width="22" height="6" rx="2" fill="#6b7596"/>
+        <rect x="44" y="79" width="12" height="4" rx="2" fill="#4c5578"/>
+        <g fill="none" stroke="#1b4fd1" stroke-width="2.2">
+          <ellipse cx="50" cy="38" rx="17" ry="6.5"/>
+          <ellipse cx="50" cy="38" rx="17" ry="6.5" transform="rotate(60 50 38)"/>
+          <ellipse cx="50" cy="38" rx="17" ry="6.5" transform="rotate(-60 50 38)"/>
+        </g>
+        <circle cx="50" cy="38" r="4" fill="#d61f2c"/>
+      </svg>
+    </div>
+    <!-- tasks: flask -->
+    <div class="cell" style="grid-column:3;grid-row:1">
+      <svg viewBox="0 0 100 85" aria-hidden="true">
+        <defs>
+          <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7cff6b"/><stop offset="1" stop-color="#1fae4b"/>
+          </linearGradient>
+        </defs>
+        <circle cx="44" cy="14" r="4" fill="none" stroke="#9cf7ff" stroke-width="2"/>
+        <circle cx="56" cy="6" r="2.6" fill="none" stroke="#9cf7ff" stroke-width="2"/>
+        <circle cx="60" cy="18" r="3" fill="none" stroke="#9cf7ff" stroke-width="2"/>
+        <path d="M40 22 H60 V40 L82 76 C84 80 82 83 78 83 H22 C18 83 16 80 18 76 L40 40Z" fill="rgba(200,240,255,.25)" stroke="#e8f8ff" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M30 58 H70 L80 76 C81 79 80 81 77 81 H23 C20 81 19 79 20 76Z" fill="url(#liquid)"/>
+        <circle cx="42" cy="70" r="3" fill="#c9ffc0"/><circle cx="56" cy="66" r="2" fill="#c9ffc0"/><circle cx="62" cy="74" r="2.4" fill="#c9ffc0"/>
+        <rect x="37" y="18" width="26" height="6" rx="2" fill="#e8f8ff"/>
+        <!-- small puzzle piece -->
+        <path d="M74 30 h7 a3 3 0 1 1 5 0 h7 v7 a3 3 0 1 0 0 5 v7 h-19z" fill="#ffc93c" stroke="#fff" stroke-width="1.2"/>
+      </svg>
+    </div>
+
+    <div class="bar"></div>
+    <span class="label">Видео&shy;уроки</span>
+    <span class="label">Интересные<br>факты</span>
+    <span class="label">Задания</span>
+    <span class="div d1"></span>
+    <span class="div d2"></span>
+  </section>
+
+  <!-- QR zone -->
+  <section class="qr-zone">
+    <div class="side">
+      <!-- atom -->
+      <svg viewBox="0 0 60 60" style="width:16cqw" aria-hidden="true">
+        <g fill="none" stroke="#4fd8ff" stroke-width="3">
+          <ellipse cx="30" cy="30" rx="26" ry="10"/>
+          <ellipse cx="30" cy="30" rx="26" ry="10" transform="rotate(60 30 30)"/>
+          <ellipse cx="30" cy="30" rx="26" ry="10" transform="rotate(-60 30 30)"/>
+        </g>
+        <circle cx="30" cy="30" r="6" fill="#ff5a3c"/>
+        <circle cx="56" cy="30" r="3" fill="#ffc93c"/><circle cx="17" cy="8" r="3" fill="#ffc93c"/><circle cx="17" cy="52" r="3" fill="#ffc93c"/>
+      </svg>
+      <div class="formula f-gold">E=mc<sup>2</sup></div>
+      <!-- prism with rainbow -->
+      <svg viewBox="0 0 80 50" style="width:18cqw" aria-hidden="true">
+        <line x1="0" y1="30" x2="28" y2="26" stroke="#fff" stroke-width="2.4"/>
+        <g stroke-width="2.6">
+          <line x1="44" y1="26" x2="80" y2="16" stroke="#ff3b3b"/>
+          <line x1="44" y1="27" x2="80" y2="21" stroke="#ff9f1c"/>
+          <line x1="44" y1="28" x2="80" y2="26" stroke="#ffe14a"/>
+          <line x1="44" y1="29" x2="80" y2="31" stroke="#3ddc63"/>
+          <line x1="44" y1="30" x2="80" y2="36" stroke="#3aa0ff"/>
+          <line x1="44" y1="31" x2="80" y2="41" stroke="#9b5cff"/>
+        </g>
+        <path d="M36 4 L56 44 H16Z" fill="rgba(190,230,255,.35)" stroke="#e8f8ff" stroke-width="2.4" stroke-linejoin="round"/>
+      </svg>
+      <div class="formula f-cyan">v=<span style="font-size:.8em">s/t</span></div>
+      <!-- magnet -->
+      <svg viewBox="0 0 60 60" style="width:13cqw" aria-hidden="true">
+        <path d="M10 6 H24 V32 A6 6 0 0 0 36 32 V6 H50 V32 A20 20 0 0 1 10 32Z" fill="#e5322d" stroke="#fff" stroke-width="2"/>
+        <rect x="10" y="6" width="14" height="9" fill="#cfd6e6"/><rect x="36" y="6" width="14" height="9" fill="#cfd6e6"/>
+        <text x="17" y="13.5" font-size="7" font-weight="800" text-anchor="middle" fill="#1b2f7a" font-family="Rubik, sans-serif">N</text>
+        <text x="43" y="13.5" font-size="7" font-weight="800" text-anchor="middle" fill="#1b2f7a" font-family="Rubik, sans-serif">S</text>
+      </svg>
+    </div>
+
+    <div class="qr-frame">
+      <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+      <svg class="qr" viewBox="0 0 33 33" shape-rendering="crispEdges" role="img" aria-label="QR-код: lososel.github.io/physics/learn.html"><path fill="#0b1030" d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM9 0h1v1h-1zM10 0h1v1h-1zM11 0h1v1h-1zM12 0h1v1h-1zM13 0h1v1h-1zM14 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM23 0h1v1h-1zM26 0h1v1h-1zM27 0h1v1h-1zM28 0h1v1h-1zM29 0h1v1h-1zM30 0h1v1h-1zM31 0h1v1h-1zM32 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h1v1h-1zM10 1h1v1h-1zM11 1h1v1h-1zM13 1h1v1h-1zM14 1h1v1h-1zM15 1h1v1h-1zM16 1h1v1h-1zM17 1h1v1h-1zM20 1h1v1h-1zM22 1h1v1h-1zM26 1h1v1h-1zM32 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM11 2h1v1h-1zM13 2h1v1h-1zM15 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM23 2h1v1h-1zM24 2h1v1h-1zM26 2h1v1h-1zM28 2h1v1h-1zM29 2h1v1h-1zM30 2h1v1h-1zM32 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM11 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h1v1h-1zM20 3h1v1h-1zM21 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM29 3h1v1h-1zM30 3h1v1h-1zM32 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h1v1h-1zM15 4h1v1h-1zM18 4h1v1h-1zM21 4h1v1h-1zM24 4h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM29 4h1v1h-1zM30 4h1v1h-1zM32 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM13 5h1v1h-1zM15 5h1v1h-1zM16 5h1v1h-1zM17 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM21 5h1v1h-1zM22 5h1v1h-1zM24 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM29 6h1v1h-1zM30 6h1v1h-1zM31 6h1v1h-1zM32 6h1v1h-1zM8 7h1v1h-1zM11 7h1v1h-1zM12 7h1v1h-1zM14 7h1v1h-1zM15 7h1v1h-1zM18 7h1v1h-1zM21 7h1v1h-1zM22 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM9 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM15 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM26 8h1v1h-1zM27 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM5 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM12 9h1v1h-1zM16 9h1v1h-1zM18 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM23 9h1v1h-1zM26 9h1v1h-1zM27 9h1v1h-1zM29 9h1v1h-1zM30 9h1v1h-1zM32 9h1v1h-1zM3 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM15 10h1v1h-1zM18 10h1v1h-1zM21 10h1v1h-1zM25 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM1 11h1v1h-1zM2 11h1v1h-1zM5 11h1v1h-1zM7 11h1v1h-1zM8 11h1v1h-1zM9 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM21 11h1v1h-1zM22 11h1v1h-1zM23 11h1v1h-1zM26 11h1v1h-1zM28 11h1v1h-1zM29 11h1v1h-1zM30 11h1v1h-1zM31 11h1v1h-1zM32 11h1v1h-1zM3 12h1v1h-1zM6 12h1v1h-1zM8 12h1v1h-1zM10 12h1v1h-1zM18 12h1v1h-1zM19 12h1v1h-1zM21 12h1v1h-1zM23 12h1v1h-1zM24 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM0 13h1v1h-1zM1 13h1v1h-1zM3 13h1v1h-1zM5 13h1v1h-1zM9 13h1v1h-1zM11 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM17 13h1v1h-1zM20 13h1v1h-1zM22 13h1v1h-1zM23 13h1v1h-1zM26 13h1v1h-1zM29 13h1v1h-1zM31 13h1v1h-1zM32 13h1v1h-1zM0 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM7 14h1v1h-1zM9 14h1v1h-1zM11 14h1v1h-1zM12 14h1v1h-1zM14 14h1v1h-1zM17 14h1v1h-1zM19 14h1v1h-1zM21 14h1v1h-1zM22 14h1v1h-1zM25 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM29 14h1v1h-1zM31 14h1v1h-1zM0 15h1v1h-1zM1 15h1v1h-1zM2 15h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM14 15h1v1h-1zM16 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM21 15h1v1h-1zM25 15h1v1h-1zM26 15h1v1h-1zM27 15h1v1h-1zM29 15h1v1h-1zM30 15h1v1h-1zM0 16h1v1h-1zM1 16h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM6 16h1v1h-1zM9 16h1v1h-1zM13 16h1v1h-1zM17 16h1v1h-1zM19 16h1v1h-1zM23 16h1v1h-1zM24 16h1v1h-1zM25 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM32 16h1v1h-1zM0 17h1v1h-1zM2 17h1v1h-1zM3 17h1v1h-1zM5 17h1v1h-1zM7 17h1v1h-1zM9 17h1v1h-1zM11 17h1v1h-1zM12 17h1v1h-1zM13 17h1v1h-1zM16 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM23 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM29 17h1v1h-1zM30 17h1v1h-1zM31 17h1v1h-1zM32 17h1v1h-1zM1 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM7 18h1v1h-1zM9 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM15 18h1v1h-1zM17 18h1v1h-1zM22 18h1v1h-1zM25 18h1v1h-1zM26 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM30 18h1v1h-1zM31 18h1v1h-1zM0 19h1v1h-1zM1 19h1v1h-1zM8 19h1v1h-1zM10 19h1v1h-1zM13 19h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM20 19h1v1h-1zM23 19h1v1h-1zM24 19h1v1h-1zM26 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM29 19h1v1h-1zM30 19h1v1h-1zM31 19h1v1h-1zM32 19h1v1h-1zM1 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM8 20h1v1h-1zM11 20h1v1h-1zM13 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM24 20h1v1h-1zM25 20h1v1h-1zM28 20h1v1h-1zM29 20h1v1h-1zM0 21h1v1h-1zM2 21h1v1h-1zM3 21h1v1h-1zM5 21h1v1h-1zM10 21h1v1h-1zM15 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM23 21h1v1h-1zM26 21h1v1h-1zM29 21h1v1h-1zM32 21h1v1h-1zM0 22h1v1h-1zM2 22h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM9 22h1v1h-1zM11 22h1v1h-1zM15 22h1v1h-1zM16 22h1v1h-1zM18 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM25 22h1v1h-1zM26 22h1v1h-1zM30 22h1v1h-1zM31 22h1v1h-1zM0 23h1v1h-1zM2 23h1v1h-1zM3 23h1v1h-1zM5 23h1v1h-1zM8 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM14 23h1v1h-1zM15 23h1v1h-1zM21 23h1v1h-1zM27 23h1v1h-1zM29 23h1v1h-1zM30 23h1v1h-1zM0 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM13 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM28 24h1v1h-1zM31 24h1v1h-1zM32 24h1v1h-1zM8 25h1v1h-1zM9 25h1v1h-1zM10 25h1v1h-1zM14 25h1v1h-1zM16 25h1v1h-1zM18 25h1v1h-1zM19 25h1v1h-1zM20 25h1v1h-1zM21 25h1v1h-1zM23 25h1v1h-1zM24 25h1v1h-1zM28 25h1v1h-1zM30 25h1v1h-1zM32 25h1v1h-1zM0 26h1v1h-1zM1 26h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM10 26h1v1h-1zM15 26h1v1h-1zM16 26h1v1h-1zM18 26h1v1h-1zM20 26h1v1h-1zM21 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM30 26h1v1h-1zM31 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM9 27h1v1h-1zM12 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM29 27h1v1h-1zM30 27h1v1h-1zM31 27h1v1h-1zM0 28h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM18 28h1v1h-1zM19 28h1v1h-1zM21 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM29 28h1v1h-1zM32 28h1v1h-1zM0 29h1v1h-1zM2 29h1v1h-1zM3 29h1v1h-1zM4 29h1v1h-1zM6 29h1v1h-1zM8 29h1v1h-1zM9 29h1v1h-1zM10 29h1v1h-1zM11 29h1v1h-1zM12 29h1v1h-1zM13 29h1v1h-1zM15 29h1v1h-1zM16 29h1v1h-1zM17 29h1v1h-1zM20 29h1v1h-1zM21 29h1v1h-1zM22 29h1v1h-1zM23 29h1v1h-1zM25 29h1v1h-1zM28 29h1v1h-1zM29 29h1v1h-1zM30 29h1v1h-1zM32 29h1v1h-1zM0 30h1v1h-1zM2 30h1v1h-1zM3 30h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM8 30h1v1h-1zM13 30h1v1h-1zM14 30h1v1h-1zM17 30h1v1h-1zM19 30h1v1h-1zM22 30h1v1h-1zM23 30h1v1h-1zM26 30h1v1h-1zM27 30h1v1h-1zM29 30h1v1h-1zM30 30h1v1h-1zM0 31h1v1h-1zM6 31h1v1h-1zM9 31h1v1h-1zM10 31h1v1h-1zM11 31h1v1h-1zM16 31h1v1h-1zM19 31h1v1h-1zM20 31h1v1h-1zM21 31h1v1h-1zM22 31h1v1h-1zM23 31h1v1h-1zM26 31h1v1h-1zM28 31h1v1h-1zM29 31h1v1h-1zM30 31h1v1h-1zM0 32h1v1h-1zM1 32h1v1h-1zM2 32h1v1h-1zM3 32h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM8 32h1v1h-1zM11 32h1v1h-1zM13 32h1v1h-1zM14 32h1v1h-1zM17 32h1v1h-1zM18 32h1v1h-1zM19 32h1v1h-1zM22 32h1v1h-1zM23 32h1v1h-1zM24 32h1v1h-1zM27 32h1v1h-1zM31 32h1v1h-1z"/></svg>
+      <span class="scan-hint">Наведи камеру телефона</span>
+    </div>
+
+    <div class="side">
+      <!-- lightning -->
+      <svg viewBox="0 0 50 60" style="width:12cqw" aria-hidden="true">
+        <path d="M30 2 L8 34 H22 L16 58 L42 22 H28Z" fill="#ffd84a" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      <div class="formula f-white">F=ma</div>
+      <!-- planet -->
+      <svg viewBox="0 0 70 50" style="width:17cqw" aria-hidden="true">
+        <defs>
+          <radialGradient id="planet" cx=".35" cy=".35" r=".7">
+            <stop offset="0" stop-color="#ffd6a0"/><stop offset=".6" stop-color="#e88a3a"/><stop offset="1" stop-color="#8f3b12"/>
+          </radialGradient>
+        </defs>
+        <path d="M6 32 C2 38 30 38 50 28 C66 20 70 12 62 12" fill="none" stroke="#c9b6ff" stroke-width="3" opacity=".6"/>
+        <circle cx="35" cy="25" r="16" fill="url(#planet)"/>
+        <path d="M8 34 C0 42 40 38 58 24 C68 16 68 10 62 12" fill="none" stroke="#c9b6ff" stroke-width="3"/>
+      </svg>
+      <div class="formula f-pink">I=<span style="font-size:.8em">U/R</span></div>
+      <!-- sine wave / lambda -->
+      <svg viewBox="0 0 70 40" style="width:16cqw" aria-hidden="true">
+        <path d="M2 20 Q10 2 18 20 T34 20 T50 20 T66 20" fill="none" stroke="#a77bff" stroke-width="3.2" stroke-linecap="round"/>
+        <text x="35" y="39" font-size="13" font-weight="800" text-anchor="middle" fill="#fff" font-family="Rubik, sans-serif">λ</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ribbon -->
+  <div class="ribbon">
+    <svg viewBox="0 .6 100 20.2" aria-label="Смотри • Исследуй • Учись!" role="img">
+      <defs>
+        <linearGradient id="rib" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ff7a4f"/><stop offset=".5" stop-color="#e8352b"/><stop offset="1" stop-color="#b3151f"/>
+        </linearGradient>
+        <path id="ribText" d="M9 14.6 Q50 6.4 91 14.6"/>
+      </defs>
+      <!-- tails -->
+      <path d="M0 11 L9 9.6 L9 19.2 L0 20.4 L3.4 15.6Z" fill="#8f0f1d"/>
+      <path d="M100 11 L91 9.6 L91 19.2 L100 20.4 L96.6 15.6Z" fill="#8f0f1d"/>
+      <path d="M6 9.8 L9 9.6 L9 19.2 Z" fill="#5a0812"/>
+      <path d="M94 9.8 L91 9.6 L91 19.2 Z" fill="#5a0812"/>
+      <!-- band -->
+      <path d="M6 9.8 Q50 1 94 9.8 L94 18.6 Q50 9.8 6 18.6 Z" fill="url(#rib)" stroke="#ffc93c" stroke-width=".5"/>
+      <path d="M7 10.6 Q50 2 93 10.6" fill="none" stroke="rgba(255,255,255,.5)" stroke-width=".35"/>
+      <text font-family="Rubik, sans-serif" font-weight="800" font-size="5.2" fill="#fff" stroke="#7a0b14" stroke-width=".5" paint-order="stroke" letter-spacing=".1">
+        <textPath href="#ribText" startOffset="50%" text-anchor="middle">Смотри • Исследуй • Учись!</textPath>
+      </text>
+    </svg>
+  </div>
+  <svg class="arrow" viewBox="0 0 40 30" aria-hidden="true">
+    <defs>
+      <linearGradient id="arr" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffd84a"/><stop offset="1" stop-color="#ff8a1f"/>
+      </linearGradient>
+    </defs>
+    <path d="M12 0 H28 V12 H38 L20 29 L2 12 H12Z" fill="url(#arr)" stroke="#fff3c4" stroke-width="1.2" stroke-linejoin="round"/>
+  </svg>
+</main>
+</div>
+
+<script>
+  // deterministic star field so the poster looks the same on every print
+  (function () {
+    var g = document.getElementById('stars');
+    var seed = 7;
+    function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    var colors = ['#ffffff', '#cfe0ff', '#fff2c4', '#bfe9ff'];
+    var ns = 'http://www.w3.org/2000/svg';
+    for (var i = 0; i < 170; i++) {
+      var c = document.createElementNS(ns, 'circle');
+      c.setAttribute('cx', (rnd() * 100).toFixed(2));
+      c.setAttribute('cy', (rnd() * 141).toFixed(2));
+      c.setAttribute('r', (0.08 + rnd() * rnd() * 0.35).toFixed(2));
+      c.setAttribute('fill', colors[Math.floor(rnd() * colors.length)]);
+      c.setAttribute('opacity', (0.4 + rnd() * 0.6).toFixed(2));
+      g.appendChild(c);
+    }
+    // a few four-point sparkles
+    var sparkles = [[30, 6], [72, 4], [95, 22], [8, 55], [93, 48], [40, 120], [65, 125], [14, 92]];
+    sparkles.forEach(function (p) {
+      var s = document.createElementNS(ns, 'path');
+      var x = p[0], y = p[1], r = 1.4;
+      s.setAttribute('d', 'M' + x + ' ' + (y - r) + ' Q' + x + ' ' + y + ' ' + (x + r * .7) + ' ' + y +
+        ' Q' + x + ' ' + y + ' ' + x + ' ' + (y + r) + ' Q' + x + ' ' + y + ' ' + (x - r * .7) + ' ' + y +
+        ' Q' + x + ' ' + y + ' ' + x + ' ' + (y - r) + 'Z');
+      s.setAttribute('fill', '#fff');
+      s.setAttribute('opacity', '.9');
+      g.appendChild(s);
+    });
+  })();
+</script>
+</body>
+</html>
